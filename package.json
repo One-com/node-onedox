@@ -2,7 +2,7 @@
   "author": "Morten Siebuhr",
   "name": "onedox",
   "description": "Annotated source code documenter",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "bin": {
       "onedox": "./onedox.js"
   },
