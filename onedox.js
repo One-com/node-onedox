@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 /*
  * Generate some documentation from DOX + stupid templating.
+ *
+ * TODO:
+ *  - Check the output directory exists (or create it)
+ *  - Strip common directory prefixes, ex. remove `lib/` from all entries
  */
 
 // Make `require()` work on HTML too!
@@ -25,6 +29,9 @@ var argv = optimist
 var files = [],
     linkList = {};
 
+/*
+ * Run each file through DOX and figure out paths.
+ */
 argv._.forEach(function (file) {
     try {
         var docs = dox.parseComments(fs.readFileSync(file, 'utf-8'));
@@ -55,7 +62,7 @@ files.forEach(function (file) {
 });
 
 /*
- * No index.html created?
+ * Create an index.html, if there's no index.js.
  */
 if (!('index.js' in linkList)) {
     var index = path.join(argv.out, "index.html");
@@ -66,4 +73,3 @@ if (!('index.js' in linkList)) {
     }));
     console.log("✓ Wrote", index, "(no index.js to use as entry point)");
 }
-
