@@ -3,7 +3,6 @@
  * Generate some documentation from DOX + stupid templating.
  *
  * TODO:
- *  - Check the output directory exists (or create it)
  *  - Strip common directory prefixes, ex. remove `lib/` from all entries
  */
 
@@ -12,16 +11,25 @@ require('jinjs').registerExtension(".html");
 
 var dox = require('dox'),
     fs = require('fs'),
+    mkdirp = require('mkdirp'),
     optimist = require('optimist'),
     path = require('path'),
     template = require('./templates/index.html');
 
+/*
+ * Read arguments
+ */
 var argv = optimist
     .usage("$0 --out <outdir> file1.js ...")
     .describe("out", "Dir to write output in")
     .demand(1)
     .demand("out")
     .argv;
+
+/*
+ * Create output directory
+ */
+mkdirp(argv.out);
 
 /*
  * Read files and DOX them.

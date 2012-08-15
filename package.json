@@ -9,6 +9,7 @@
   "dependencies": {
       "dox": "*",
       "jinjs": "*",
+      "mkdirp": "*",
       "optimist": "*"
   },
   "devDependencies": {},
