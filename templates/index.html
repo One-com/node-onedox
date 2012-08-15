@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>{{ title }}</title>
+
+		<style>
+			body {
+				font-family: helvetica, sans-serif;
+			}
+			a, a:visited, h1 {
+				color: darkred;
+			}
+			a:hover {
+				color: white;
+				background: darkred;
+			}
+			td {
+				vertical-align: top;
+				padding-bottom: 10px;
+			}
+			menu {
+				border-bottom: 2px solid wheat;
+				padding: 3px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1><tt>{{ title }}</tt></h1>
+		{% if menu %}
+		<menu>
+		{% for file, url in menu %}
+			<a href="{{ url }}">{{ file }}</a>
+		{% endfor %}
+		</menu>
+		{% endif %}
+
+		<table>
+		{% for d in docs %}
+			<tr>
+				<td>{{ d.description.full }}</td>
+				<td><pre>{{ d.code }}</pre></td>
+			</tr>
+		{% endfor %}
+		</table>
+	</body>
+</html>

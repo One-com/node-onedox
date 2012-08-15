@@ -1,0 +1,16 @@
+{
+  "author": "Morten Siebuhr",
+  "name": "onedox",
+  "description": "Annotated source code documenter",
+  "version": "0.0.0",
+  "bin": {
+      "onedox": "./onedox.js"
+  },
+  "dependencies": {
+      "dox": "*",
+      "jinjs": "*",
+      "optimist": "*"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
