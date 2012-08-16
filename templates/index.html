@@ -48,13 +48,11 @@
 	</head>
 	<body>
 		<h1><tt>{{ title }}</tt></h1>
-		{% if menu %}
 		<menu>
-		{% for file, url in menu %}
-			<a href="{{ url }}">{{ file }}</a>
+		{% for d in docs %}
+			<a href="{{ d.outFile }}">{{ d.source }}</a>
 		{% endfor %}
 		</menu>
-		{% endif %}
 
 		<table cellpadding="0" cellspacing="0">
 		{% for d in docs %}
