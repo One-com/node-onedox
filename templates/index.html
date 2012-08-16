@@ -13,10 +13,24 @@
 				color: white;
 				background: darkred;
 			}
-			td {
+			td.docs {
 				vertical-align: top;
-				padding-bottom: 10px;
+				width: 100%;
+				padding: 10px 25px 1px 10px;
+				overflow-x: hidden;
+				vertical-align: top;
+				text-align: left;
 			}
+
+			td.code {
+				vertical-align: top;
+				padding: 14px 15px 16px 10px;
+				width: 100%;
+				vertical-align: top;
+				background: #F5F5FF;
+				border-left: 1px solid #E5E5EE;
+			}
+
 			menu {
 				border-bottom: 2px solid wheat;
 				padding: 3px;
@@ -33,11 +47,11 @@
 		</menu>
 		{% endif %}
 
-		<table>
+		<table cellpadding="0" cellspacing="0">
 		{% for d in docs %}
 			<tr>
-				<td>{{ d.description.full }}</td>
-				<td><pre>{{ d.code }}</pre></td>
+				<td class="docs">{{ d.description.full }}</td>
+				<td class="code"><pre>{{ d.code }}</pre></td>
 			</tr>
 		{% endfor %}
 		</table>
