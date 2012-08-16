@@ -37,8 +37,10 @@ mkdirp(staticDir, function () {
     var files = [],
         linkList = {};
     argv._.forEach(function (file) {
+        var docs;
+
         try {
-            var docs = dox.parseComments(fs.readFileSync(file, 'utf-8'));
+            docs = dox.parseComments(fs.readFileSync(file, 'utf-8'));
         } catch (e) {
             console.error("✗ Couldn't parse", file);
             return;
@@ -86,7 +88,7 @@ mkdirp(staticDir, function () {
         target = path.join(staticDir, file);
 
         fs.createReadStream(source)
-        .on('end', function() { console.log("✓ Wrote", target); })
-        .pipe(fs.createWriteStream(target))
+            .on('end', function() { console.log("✓ Wrote", target); })
+            .pipe(fs.createWriteStream(target));
     });
 });
