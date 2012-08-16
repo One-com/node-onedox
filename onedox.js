@@ -37,22 +37,24 @@ mkdirp(staticDir, function () {
     var files = [],
         linkList = {};
     argv._.forEach(function (file) {
-        var docs;
+        // Set up data structures
+        var outFile = file.replace(/\.js$/, '').replace(/\//g, '_') + '.html';
+        var data = {
+            source: file,
+            dox: undefined,
+            outFile: path.join(argv.out, outFile)
+        };
 
+        // Work with the file
+        var fileData = fs.readFileSync(file, 'utf-8');
         try {
-            docs = dox.parseComments(fs.readFileSync(file, 'utf-8'));
+            data.dox = dox.parseComments(fileData);
         } catch (e) {
-            console.error("✗ Couldn't parse", file);
-            return;
+            data.dox = [{description:{full:""},code:fileData}];
         }
 
-        var outFile = file.replace(/\.js$/, '').replace(/\//g, '_') + '.html';
         linkList[file] = outFile;
-        files.push({
-            source: file,
-            dox: docs,
-            outFile: path.join(argv.out, outFile)
-        });
+        files.push(data);
     });
 
     /*
