@@ -77,4 +77,16 @@ mkdirp(staticDir, function () {
         }));
         console.log("✓ Wrote", index, "(no index.js to use as entry point)");
     }
+
+    /*
+     * Copy static files
+     */
+    ['prism.css', 'prism.js'].forEach(function (file) {
+        var source = path.join(__dirname, 'static', file),
+        target = path.join(staticDir, file);
+
+        fs.createReadStream(source)
+        .on('end', function() { console.log("✓ Wrote", target); })
+        .pipe(fs.createWriteStream(target))
+    });
 });

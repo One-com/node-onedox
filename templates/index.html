@@ -1,7 +1,9 @@
 <html>
 	<head>
 		<title>{{ title }}</title>
-
+		<meta charset="utf-8">
+		<link href="static/prism.css" rel="stylesheet" />
+		<script src="static/prism.js"></script>
 		<style>
 			body {
 				font-family: helvetica, sans-serif;
@@ -14,21 +16,28 @@
 				background: darkred;
 			}
 			td.docs {
+				min-width: 200px;
 				vertical-align: top;
 				width: 100%;
-				padding: 10px 25px 1px 10px;
+				padding: 1em;
 				overflow-x: hidden;
 				vertical-align: top;
 				text-align: left;
 			}
 
+			td.docs p {
+				margin: 8px 0px;
+			}
+
+			td.docs tt, td.docs code {
+				background: #F5F2F0;
+			}
+
 			td.code {
 				vertical-align: top;
-				padding: 14px 15px 16px 10px;
 				width: 100%;
 				vertical-align: top;
-				background: #F5F5FF;
-				border-left: 1px solid #E5E5EE;
+				background: #F5F2F0;
 			}
 
 			menu {
@@ -51,7 +60,7 @@
 		{% for d in docs %}
 			<tr>
 				<td class="docs">{{ d.description.full }}</td>
-				<td class="code"><pre>{{ d.code }}</pre></td>
+				<td class="code"><pre><code class="language-javascript">{{ d.code }}</code></pre></td>
 			</tr>
 		{% endfor %}
 		</table>
