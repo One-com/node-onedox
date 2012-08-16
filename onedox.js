@@ -6,10 +6,10 @@
 // Make `require()` work on HTML too!
 require('jinjs').registerExtension(".html");
 
-var dox = require('dox'),
-    fs = require('fs'),
+var fs = require('fs'),
     mkdirp = require('mkdirp'),
     optimist = require('optimist'),
+    parser = require('./lib/parser'),
     path = require('path'),
     template = require('./templates/index.html');
 
@@ -34,23 +34,17 @@ mkdirp(staticDir, function () {
     var parsedFiles = [];
     argv._.forEach(function (file) {
         // Set up data structures
-        var outFile = file.replace(/\.js$/, '').replace(/\//g, '_') + '.html';
-        var data = {
+        var outFile = file
+            .replace(/\.js$/, '')
+            .replace(/\//g, '_') + '.html';
+
+        // Push out data.
+        parsedFiles.push({
             source: file,
-            dox: undefined,
+            dox: parser(file),
             outFileRelative: outFile,
             outFile: path.join(argv.out, outFile)
-        };
-
-        // Work with the file
-        var fileData = fs.readFileSync(file, 'utf-8');
-        try {
-            data.dox = dox.parseComments(fileData);
-        } catch (e) {
-            data.dox = [{description:{full:""},code:fileData}];
-        }
-
-        parsedFiles.push(data);
+        });
     });
 
     /*
