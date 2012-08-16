@@ -34,13 +34,14 @@ mkdirp(staticDir, function () {
     /*
      * Run each file through DOX and figure out paths.
      */
-    var files = [];
+    var parsedFiles = [];
     argv._.forEach(function (file) {
         // Set up data structures
         var outFile = file.replace(/\.js$/, '').replace(/\//g, '_') + '.html';
         var data = {
             source: file,
             dox: undefined,
+            outFileRelative: outFile,
             outFile: path.join(argv.out, outFile)
         };
 
@@ -52,15 +53,16 @@ mkdirp(staticDir, function () {
             data.dox = [{description:{full:""},code:fileData}];
         }
 
-        files.push(data);
+        parsedFiles.push(data);
     });
 
     /*
      * Run each file through the template and write it out.
      */
-    files.forEach(function (file) {
+    parsedFiles.forEach(function (file) {
         fs.writeFileSync(file.outFile, template.render({
             docs: file.dox,
+            files: parsedFiles,
             title: file.source
         }));
         console.log("✓ Wrote", file.outFile);
@@ -70,13 +72,13 @@ mkdirp(staticDir, function () {
      * Create an index.html, if there's no index.js.
      */
     var indexHtml = true;
-    files.forEach(function (doc) {
+    parsedFiles.forEach(function (doc) {
         indexHtml = indexHtml && (doc.source !== 'index.js');
     });
     if (indexHtml) {
         var index = path.join(argv.out, "index.html");
         fs.writeFileSync(index, template.render({
-            docs: [],
+            files: parsedFiles,
             title: "Documentation index"
         }));
         console.log("✓ Wrote", index, "(no index.js to use as entry point)");

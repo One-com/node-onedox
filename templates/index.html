@@ -49,8 +49,8 @@
 	<body>
 		<h1><tt>{{ title }}</tt></h1>
 		<menu>
-		{% for d in docs %}
-			<a href="{{ d.outFile }}">{{ d.source }}</a>
+		{% for f in files %}
+			<a href="{{ f.outFileRelative }}">{{ f.source }}</a>
 		{% endfor %}
 		</menu>
 
