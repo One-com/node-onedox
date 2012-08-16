@@ -12,6 +12,8 @@
       "mkdirp": "*",
       "optimist": "*"
   },
-  "devDependencies": {},
+  "devDependencies": {
+      "jshint": "*"
+  },
   "optionalDependencies": {}
 }
