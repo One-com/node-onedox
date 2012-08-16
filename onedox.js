@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 /*
  * Generate some documentation from DOX + stupid templating.
- *
- * TODO:
- *  - Strip common directory prefixes, ex. remove `lib/` from all entries
  */
 
 // Make `require()` work on HTML too!
