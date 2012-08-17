@@ -2,7 +2,7 @@
     "author": "Morten Siebuhr",
     "name": "onedox",
     "description": "Annotated source code documenter",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "keywords": [
         "annotation",
         "code",
@@ -27,6 +27,5 @@
     },
     "devDependencies": {
         "jshint": "*"
-    },
-    "publishConfig": "https://registry.npmjs.org/"
+    }
 }
