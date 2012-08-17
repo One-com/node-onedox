@@ -1,32 +1,32 @@
 {
-  "author": "Morten Siebuhr",
-  "name": "onedox",
-  "description": "Annotated source code documenter",
-  "version": "0.0.2",
-  "keywords": [
+    "author": "Morten Siebuhr",
+    "name": "onedox",
+    "description": "Annotated source code documenter",
+    "version": "0.0.2",
+    "keywords": [
         "annotation",
         "code",
         "docco",
         "documentation",
         "dox",
         "source"
-  ],
-  "repository": {
+    ],
+    "repository": {
         "type": "git",
         "url": "http://github.com/one-com/node-onedox.git"
-  },
-  "homepage": "https://github.com/one-com/node-onedox/",
-  "bin": {
-      "onedox": "./onedox.js"
-  },
-  "dependencies": {
-      "dox": "*",
-      "jinjs": "*",
-      "mkdirp": "*",
-      "optimist": "*"
-  },
-  "devDependencies": {
-      "jshint": "*"
-  },
-  "publishConfig": "https://registry.npmjs.org/"
+    },
+    "homepage": "https://github.com/one-com/node-onedox/",
+    "bin": {
+        "onedox": "./onedox.js"
+    },
+    "dependencies": {
+        "dox": "*",
+        "jinjs": "*",
+        "mkdirp": "*",
+        "optimist": "*"
+    },
+    "devDependencies": {
+        "jshint": "*"
+    },
+    "publishConfig": "https://registry.npmjs.org/"
 }
