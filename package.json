@@ -3,6 +3,19 @@
   "name": "onedox",
   "description": "Annotated source code documenter",
   "version": "0.0.2",
+  "keywords": [
+        "annotation",
+        "code",
+        "docco",
+        "documentation",
+        "dox",
+        "source"
+  ],
+  "repository": {
+        "type": "git",
+        "url": "http://github.com/one-com/node-onedox.git"
+  },
+  "homepage": "https://github.com/one-com/node-onedox/",
   "bin": {
       "onedox": "./onedox.js"
   },
@@ -15,5 +28,5 @@
   "devDependencies": {
       "jshint": "*"
   },
-  "optionalDependencies": {}
+  "publishConfig": "https://registry.npmjs.org/"
 }
