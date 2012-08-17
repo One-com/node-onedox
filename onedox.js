@@ -3,6 +3,8 @@
  * Generate some documentation from DOX + stupid templating.
  */
 
+/*global console*/
+
 // Make `require()` work on HTML too!
 require('jinjs').registerExtension(".html");
 
@@ -83,7 +85,7 @@ mkdirp(staticDir, function () {
         target = path.join(staticDir, file);
 
         fs.createReadStream(source)
-            .on('end', function() { console.log("✓ Wrote", target); })
+            .on('end', function () { console.log("✓ Wrote", target); })
             .pipe(fs.createWriteStream(target));
     });
 });
