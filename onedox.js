@@ -46,8 +46,41 @@ mkdirp(staticDir, function () {
             source: file,
             dox: parser(file),
             outFileRelative: outFile,
-            outFile: path.join(argv.out, outFile)
+            outFile: path.join(argv.out, outFile),
+            sourceFilename: path.basename(file)
         });
+    });
+
+    /* Show a nice tree hierarcy.
+     */
+    var menuTree = {},
+        inspect = require('util').inspect;
+
+    parsedFiles.forEach(function (file) {
+        var dirname = path.dirname(file.source);
+
+        if (dirname in menuTree) {
+            menuTree[dirname].files.push(file);
+        } else {
+            menuTree[dirname] = {
+                sortKey: dirname,
+                files: [file],
+                dirname: path.basename(dirname) + "/",
+                indent: dirname.split("/").length - 1
+            };
+        }
+    });
+
+    // Flatten and sort based on full path (`sortKey`).
+    var menu = [];
+    Object.keys(menuTree).sort().forEach(function (key) {
+        // Sort file names in folder
+        menuTree[key].files.sort(function (a, b) {
+            return a.sourceFilename.localeCompare(b.sourceFilename);
+        });
+
+        // Push it on the output array
+        menu.push(menuTree[key]);
     });
 
     /*
@@ -56,7 +89,7 @@ mkdirp(staticDir, function () {
     parsedFiles.forEach(function (file) {
         fs.writeFileSync(file.outFile, template.render({
             docs: file.dox,
-            files: parsedFiles,
+            menu: menu,
             title: file.source
         }));
         console.log("✓ Wrote", file.outFile);
@@ -72,7 +105,7 @@ mkdirp(staticDir, function () {
     if (indexHtml) {
         var index = path.join(argv.out, "index.html");
         fs.writeFileSync(index, template.render({
-            files: parsedFiles,
+            menu: menu,
             title: "Documentation index"
         }));
         console.log("✓ Wrote", index, "(no index.js to use as entry point)");

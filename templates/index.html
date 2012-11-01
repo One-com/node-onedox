@@ -44,13 +44,27 @@
 				border-bottom: 2px solid wheat;
 				padding: 3px;
 			}
+
+			menu .dirname {
+				font-family: Monospace;
+				font-size: 1.1em;
+			}
+
+			menu a {
+				margin-left: 0.5em;
+			}
 		</style>
 	</head>
 	<body>
 		<h1><tt>{{ title }}</tt></h1>
 		<menu>
-		{% for f in files %}
-			<a href="{{ f.outFileRelative }}">{{ f.source }}</a>
+		{% for dir in menu %}
+			<span class="dirname" style="padding-left: {{ dir.indent * 1.5 }}em;">{{ dir.dirname }}</span>
+
+			{% for file in dir.files %}
+				<a href="{{ file.outFileRelative }}">{{ file.sourceFilename }}</a>
+			{% endfor %}
+		<br/>
 		{% endfor %}
 		</menu>
 
