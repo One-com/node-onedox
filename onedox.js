@@ -21,6 +21,7 @@ var fs = require('fs'),
 var argv = optimist
     .usage("$0 --out <outdir> file1.js ...")
     .describe("out", "Dir to write output in")
+    .alias("o", "out")
     .demand(1)
     .demand("out")
     .argv;
