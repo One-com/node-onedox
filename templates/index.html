@@ -62,7 +62,7 @@
 			<span class="dirname" style="padding-left: {{ dir.indent * 1.5 }}em;">{{ dir.dirname }}</span>
 
 			{% for file in dir.files %}
-				<a href="{{ file.outFileRelative }}">{{ file.sourceFilename }}</a>
+				<a href="{{ file.outFileRelative }}" {% if file.source === title %}style="font-weight: bold;"{% endif %}>{{ file.sourceFilename }}</a>
 			{% endfor %}
 		<br/>
 		{% endfor %}
